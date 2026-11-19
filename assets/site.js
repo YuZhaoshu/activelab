@@ -48,16 +48,26 @@ function renderHero() {
   const meta = get("project-meta");
   if (authors.length) meta.append(element("p", "", authors.join(", ")));
   if (affiliations.length) meta.append(element("p", "affiliations", affiliations.join(" · ")));
-  if (links.length) {
-    const row = element("div", "project-links");
-    for (const { label, url } of links) {
-      const link = element("a", "", label);
-      link.href = url;
-      row.append(link);
-    }
-    meta.append(row);
-  }
   meta.hidden = !meta.childElementCount;
+
+  const resources = get("project-links");
+  resources.replaceChildren();
+  resources.hidden = !links.length;
+  for (const { label, url, purpose } of links) {
+    const accessibleLabel = purpose ? label + " (" + purpose + ")" : label;
+    if (url) {
+      const link = element("a", "resource", label);
+      link.href = url;
+      link.setAttribute("aria-label", accessibleLabel);
+      resources.append(link);
+    } else {
+      const placeholder = button(label, "resource");
+      placeholder.disabled = true;
+      placeholder.title = purpose ? purpose + " link pending" : "Link pending";
+      placeholder.setAttribute("aria-label", accessibleLabel + " — link pending");
+      resources.append(placeholder);
+    }
+  }
 
   if (hero?.src) {
     get("hero-media").replaceChildren(media(hero, "ActiveLab overview video", "metadata").wrapper);
@@ -92,15 +102,18 @@ function renderEntries(target, label, entries, renderEntry) {
   const body = element("div");
   target.replaceChildren();
   if (entries.length > 1) {
-    const picker = element("label", "entry-picker", label);
+    const picker = element("div", "entry-picker");
+    const name = element("label", "", label);
     const select = element("select");
+    select.id = target.id + "-entry";
+    name.htmlFor = select.id;
     entries.forEach(({ title }, index) => {
       const option = element("option", "", title);
       option.value = index;
       select.append(option);
     });
     select.addEventListener("change", () => update(Number(select.value)));
-    picker.append(select);
+    picker.append(name, select);
     target.append(picker);
   }
   target.append(body);
@@ -119,10 +132,11 @@ function renderPair(target, comparison) {
     const label = clip.label || ["Fixed viewpoint", "Active viewpoint"][index];
     const card = element("figure", "media-card");
     const { wrapper, video } = media(clip, comparison.title + " — " + label);
-    const caption = element("figcaption");
+    const caption = element("figcaption", "comparison-label");
     const dot = element("span", index ? "comparison-dot active-dot" : "comparison-dot");
+    dot.setAttribute("aria-hidden", "true");
     caption.append(dot, label);
-    card.append(wrapper, caption);
+    card.append(caption, wrapper);
     grid.append(card);
     return video;
   });
@@ -135,11 +149,13 @@ function renderPair(target, comparison) {
   play.addEventListener("click", async () => {
     const request = ++playbackRequest;
     status.textContent = "";
-    const results = await Promise.allSettled(videos.map(async (video) => {
-      video.currentTime = 0;
-      await video.play();
-    }));
-    if (request === playbackRequest && results.some(({ status }) => status === "rejected")) {
+    try {
+      await Promise.all(videos.map(async (video) => {
+        video.currentTime = 0;
+        await video.play();
+      }));
+    } catch {
+      if (request !== playbackRequest) return;
       videos.forEach((video) => video.pause());
       status.textContent = "Could not start both videos. Check the clips and try again.";
     }
@@ -147,6 +163,7 @@ function renderPair(target, comparison) {
   pause.addEventListener("click", () => {
     playbackRequest += 1;
     videos.forEach((video) => video.pause());
+    status.textContent = "";
   });
   tools.append(play, pause, status);
   target.append(element("h3", "entry-title", comparison.title), grid, tools);
@@ -219,7 +236,7 @@ function renderRollout(target, rollout) {
     function updateChapter(currentTime) {
       let active = -1;
       steps.forEach(({ time }, index) => {
-        if (time <= currentTime) active = index;
+        if (time <= currentTime && !chapters[index].disabled) active = index;
       });
       chapters.forEach((control, index) => {
         if (active === index) control.setAttribute("aria-current", "step");
@@ -227,10 +244,14 @@ function renderRollout(target, rollout) {
       });
     }
     video.addEventListener("timeupdate", () => updateChapter(video.currentTime));
-    video.addEventListener("loadedmetadata", () => {
+    video.addEventListener("durationchange", () => {
       chapters.forEach((control, index) => {
         control.disabled = steps[index].time >= video.duration;
       });
+      updateChapter(video.currentTime);
+    });
+    video.addEventListener("error", () => {
+      chapters.forEach((control) => { control.disabled = true; });
       updateChapter(video.currentTime);
     });
     updateChapter(0);

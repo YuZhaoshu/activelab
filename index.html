@@ -3,12 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="ActiveLab is a robotics research project on active perception, atomic skills, and multi-step chemical experiments.">
-  <meta name="theme-color" content="#f7f8f4">
+  <meta name="description" content="ActiveLab studies active perception and atomic skill composition for multi-step robotic chemistry experiments.">
+  <meta name="theme-color" content="#f9fbff">
   <link rel="canonical" href="https://yuzhaoshu.github.io/activelab/">
+  <link rel="stylesheet" href="./assets/vendor/lenis.css">
   <link rel="stylesheet" href="./assets/site.css">
   <script type="module" src="./assets/site.js"></script>
-  <title>ActiveLab</title>
+  <script type="module" src="./assets/reading.js"></script>
+  <title>ActiveLab | Active Perception for Robotic Chemistry</title>
 </head>
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -20,78 +22,87 @@
         <a href="#skills">Skills</a>
         <a href="#rollouts">Rollouts</a>
       </div>
-      <a class="repo-link" href="https://github.com/YuZhaoshu/activelab">Website source <span aria-hidden="true">↗</span></a>
+      <a class="repo-link" href="https://github.com/YuZhaoshu/activelab">Website source</a>
     </nav>
+    <div class="reading-progress" aria-hidden="true"></div>
   </header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
     <section class="shell hero" aria-labelledby="hero-title">
       <div class="masthead">
-        <div>
-          <h1 id="hero-title">ActiveLab<span>.</span></h1>
-          <p class="subtitle">Active perception for robotic chemistry</p>
-        </div>
-        <div class="hero-side">
-          <p>Exploring how robots can change their viewpoint and compose atomic skills in multi-step chemical experiments.</p>
-          <a class="jump" href="#perception">Explore the project <span aria-hidden="true">↓</span></a>
+        <h1 id="hero-title">Active perception <span>for robotic chemistry</span></h1>
+        <p class="hero-description">Studying how robots choose where to look and combine atomic skills in multi-step chemical experiments.</p>
+        <div id="project-meta" hidden></div>
+        <a class="primary-action" href="#perception">Explore the experiments</a>
+        <div id="project-links" class="project-links" role="group" aria-label="Research resources">
+          <button type="button" class="resource" disabled>arXiv</button>
+          <button type="button" class="resource" disabled>GitHub</button>
+          <button type="button" class="resource" disabled>Hugging Face</button>
         </div>
       </div>
-      <div id="project-meta" hidden></div>
       <figure class="hero-figure">
         <div class="hero-stage" id="hero-media">
           <canvas id="viewpoint-illustration" aria-hidden="true"></canvas>
-          <div class="view-legend" aria-hidden="true"><span></span> Camera field of view</div>
         </div>
-        <figcaption id="hero-caption"><span class="caption-line" aria-hidden="true"></span> Concept illustration of a camera viewpoint</figcaption>
+        <figcaption id="hero-caption">
+          <span>Concept illustration</span>
+          <span class="view-legend">Camera field of view</span>
+        </figcaption>
       </figure>
     </section>
 
-    <section class="shell research-intro" id="research" hidden aria-labelledby="research-title">
+    <section class="shell panel-section" id="research" hidden aria-labelledby="research-title">
       <h2 id="research-title">Overview</h2>
       <div id="research-content"></div>
     </section>
 
     <section class="shell panel-section" id="perception" aria-labelledby="perception-title">
-      <div class="section-heading">
-        <div><p class="section-label">Viewpoint</p><h2 id="perception-title">Active perception</h2></div>
-        <p class="section-description">How does changing the camera viewpoint affect what the robot can see during a task?</p>
+      <div class="section-heading" data-reveal>
+        <h2 id="perception-title">Fixed vs. active views</h2>
+        <p class="section-description">How does a change in camera viewpoint affect what the robot can see during the same task?</p>
       </div>
       <div id="comparisons">
         <div class="comparison-grid">
           <figure class="media-card">
+            <figcaption class="comparison-label"><span class="comparison-dot" aria-hidden="true"></span>Fixed viewpoint</figcaption>
             <div class="placeholder comparison-fixed" aria-hidden="true"><span class="focus-mark"></span></div>
-            <figcaption><span class="comparison-dot"></span>Fixed viewpoint</figcaption>
           </figure>
           <figure class="media-card">
+            <figcaption class="comparison-label"><span class="comparison-dot active-dot" aria-hidden="true"></span>Active viewpoint</figcaption>
             <div class="placeholder comparison-active" aria-hidden="true"><span class="focus-mark"></span></div>
-            <figcaption><span class="comparison-dot active-dot"></span>Active viewpoint</figcaption>
           </figure>
         </div>
-        <p class="empty-note">Comparison videos pending.</p>
+        <p class="media-note">Comparison videos pending.</p>
       </div>
     </section>
 
     <section class="skills-section" id="skills" aria-labelledby="skills-title">
       <div class="shell">
-        <div class="section-heading">
-          <div><p class="section-label">Manipulation</p><h2 id="skills-title">Atomic skills</h2></div>
-          <p class="section-description">Individual robot actions that can be combined into longer tasks.</p>
+        <div class="section-heading" data-reveal>
+          <h2 id="skills-title">Atomic skills</h2>
+          <p class="section-description">Browse individual robot actions that can be combined into longer experiments.</p>
         </div>
         <div id="skills-content">
-          <div class="empty-service"><span class="reel-mark" aria-hidden="true"></span><p>Skill videos pending.</p></div>
+          <div class="placeholder gallery-placeholder">
+            <span class="reel-mark" aria-hidden="true"></span>
+            <p>Skill videos pending.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="shell panel-section rollout-section" id="rollouts" aria-labelledby="rollout-title">
-      <div class="section-heading">
-        <div><p class="section-label">Experiments</p><h2 id="rollout-title">Lab rollouts</h2></div>
-        <p class="section-description">A place to watch complete experiments and inspect individual steps.</p>
+      <div class="section-heading" data-reveal>
+        <h2 id="rollout-title">Lab rollouts</h2>
+        <p class="section-description">Watch full experimental runs and jump to individual steps.</p>
       </div>
       <div id="rollouts-content">
         <div class="rollout-grid">
-          <div class="placeholder rollout-placeholder" aria-hidden="true"><span class="reel-mark"></span></div>
-          <div class="chapter-panel"><h3>Experiment steps</h3><p>Step navigation will appear when a rollout is added.</p></div>
+          <div class="placeholder rollout-placeholder">
+            <span class="reel-mark" aria-hidden="true"></span>
+            <p>Rollout videos pending.</p>
+          </div>
+          <aside class="chapter-panel"><h3>Experiment steps</h3><p>Step navigation appears with each rollout.</p></aside>
         </div>
       </div>
     </section>
@@ -110,7 +121,7 @@
   <footer class="site-footer">
     <div class="shell footer-inner">
       <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>ActiveLab</a>
-      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+      <a class="back-link" href="#top">Back to top</a>
     </div>
   </footer>
 </body>
