@@ -12,6 +12,7 @@ export const project = {
   comparisons: [],
   skills: [],
   rollouts: [],
+  protocol: null,
   results: null,
   bibtex: "",
 };

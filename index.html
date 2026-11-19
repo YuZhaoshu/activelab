@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="./assets/site.css">
   <script type="module" src="./assets/site.js"></script>
   <script type="module" src="./assets/reading.js"></script>
-  <title>ActiveLab | Active Hand–Eye Coordination for Robotic Chemistry</title>
+  <title>ActiveLab | Benchmarking Active Perception and Manipulation in Robotic Chemistry</title>
 </head>
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -18,9 +18,10 @@
     <nav class="shell nav" aria-label="Main navigation">
       <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>ActiveLab</a>
       <div class="nav-links">
-        <a href="#perception">Observation</a>
-        <a href="#skills">Manipulation</a>
-        <a href="#rollouts">Coordination</a>
+        <a href="#research">Abstract</a>
+        <a href="#benchmark">Benchmark</a>
+        <a href="#tasks">Tasks</a>
+        <a href="#evaluation">Evaluation</a>
       </div>
       <a class="repo-link" href="https://github.com/YuZhaoshu/activelab">Website source</a>
     </nav>
@@ -30,11 +31,9 @@
   <main id="main" tabindex="-1">
     <section class="shell hero" aria-labelledby="hero-title">
       <div class="masthead">
-        <p class="hero-field">Robotic chemistry</p>
-        <h1 id="hero-title">Active hand–eye <span>coordination</span></h1>
-        <p class="hero-description">How can a robot choose what to observe, manipulate lab tools precisely, and adjust its view as the action unfolds?</p>
+        <h1 id="hero-title">ActiveLab</h1>
+        <p class="hero-subtitle">Benchmarking active perception and manipulation in robotic chemistry</p>
         <div id="project-meta" hidden></div>
-        <a class="primary-action" href="#rollouts">Explore the hand–eye loop</a>
         <div id="project-links" class="project-links" role="group" aria-label="Research resources">
           <button type="button" class="resource" disabled>arXiv</button>
           <button type="button" class="resource" disabled>GitHub</button>
@@ -50,105 +49,93 @@
           <span class="view-legend">Camera field of view</span>
         </figcaption>
       </figure>
-      <nav class="research-path" aria-label="Research focus">
-        <a class="focus-card" href="#perception">
-          <span class="lens-symbol lens-observe" aria-hidden="true"></span>
-          <span><strong>Active observation</strong><span>Choose a view of the task-relevant region.</span></span>
-        </a>
-        <a class="focus-card" href="#skills">
-          <span class="lens-symbol lens-manipulate" aria-hidden="true"></span>
-          <span><strong>Fine manipulation</strong><span>Inspect alignment, contact, and tool motion.</span></span>
-        </a>
-        <a class="focus-card focus-card-feature" href="#rollouts">
-          <span class="lens-symbol lens-coordinate" aria-hidden="true"></span>
-          <span><strong>Active hand–eye coordination</strong><span>Follow the view and action on one timeline.</span></span>
-        </a>
-      </nav>
     </section>
 
-    <section class="shell panel-section" id="research" hidden aria-labelledby="research-title">
-      <h2 id="research-title">Overview</h2>
-      <div id="research-content"></div>
-    </section>
-
-    <section class="shell panel-section" id="perception" aria-labelledby="perception-title">
-      <div class="section-heading" data-reveal>
-        <h2 id="perception-title">Active observation</h2>
-        <p class="section-description">Compare fixed and active views of the same task. Look at what changes around the object or working region as the camera moves.</p>
+    <section class="shell panel-section" id="research" aria-labelledby="research-title">
+      <div class="paper-prose">
+        <h2 id="research-title" data-reveal>Abstract</h2>
+        <p id="abstract-summary">Robotic chemistry combines changing viewpoints with precise tool interactions. ActiveLab studies active observation, fine manipulation, and active hand–eye coordination in this shared task setting.</p>
       </div>
-      <div id="comparisons">
-        <div class="comparison-grid">
-          <figure class="media-card">
-            <figcaption class="comparison-label"><span class="comparison-dot" aria-hidden="true"></span>Fixed viewpoint</figcaption>
-            <div class="placeholder comparison-fixed" aria-hidden="true"><span class="focus-mark"></span></div>
-          </figure>
-          <figure class="media-card">
-            <figcaption class="comparison-label"><span class="comparison-dot active-dot" aria-hidden="true"></span>Active viewpoint</figcaption>
-            <div class="placeholder comparison-active" aria-hidden="true"><span class="focus-mark"></span></div>
-          </figure>
-        </div>
-        <p class="media-note">Comparison videos pending.</p>
-      </div>
+      <div class="paper-prose" id="research-content"></div>
     </section>
 
-    <section class="skills-section" id="skills" aria-labelledby="skills-title">
+    <section class="benchmark-section" id="benchmark" aria-labelledby="benchmark-title">
       <div class="shell">
         <div class="section-heading" data-reveal>
-          <h2 id="skills-title">Fine manipulation</h2>
-          <p class="section-description">Use close-ups of individual skills to inspect tool alignment, contact with labware, and the motion that follows.</p>
+          <h2 id="benchmark-title">Benchmark</h2>
+          <p class="section-description">Three related dimensions for examining the same chemistry task.</p>
         </div>
-        <div id="skills-content">
-          <div class="placeholder gallery-placeholder">
+        <div class="research-path">
+          <a class="dimension" href="#perception">
+            <span class="lens-symbol lens-observe" aria-hidden="true"></span>
+            <h3>Active observation</h3>
+            <p>Which parts of the workspace does the robot choose to observe?</p>
+          </a>
+          <a class="dimension" href="#skills">
             <span class="lens-symbol lens-manipulate" aria-hidden="true"></span>
-            <p>Close-up skill videos pending.</p>
-          </div>
+            <h3>Fine manipulation</h3>
+            <p>How precisely does the robot align and move a tool?</p>
+          </a>
+          <a class="dimension" href="#rollouts">
+            <span class="lens-symbol lens-coordinate" aria-hidden="true"></span>
+            <h3>Active hand–eye coordination</h3>
+            <p>How does the timing of view changes relate to tool actions?</p>
+          </a>
+        </div>
+        <div class="shared-context">
+          <h3>Shared task context</h3>
+          <p>At the point where a tool meets labware, observation concerns visibility of the contact point, manipulation concerns alignment and motion, and coordination concerns how the view changes around that interaction.</p>
         </div>
       </div>
     </section>
 
-    <section class="rollout-section" id="rollouts" aria-labelledby="rollout-title">
+    <section class="shell panel-section" id="tasks" aria-labelledby="tasks-title">
+      <div class="section-heading" data-reveal>
+        <h2 id="tasks-title">Tasks and demonstrations</h2>
+      </div>
+      <div class="task-grid">
+        <section class="task-example" id="perception" aria-labelledby="perception-title">
+          <header class="task-header">
+            <h3 id="perception-title">Viewpoint comparisons</h3>
+            <p>Fixed and active views of the same task step.</p>
+          </header>
+          <div id="comparisons"><p class="task-status">Comparison videos pending.</p></div>
+        </section>
+
+        <section class="task-example" id="skills" aria-labelledby="skills-title">
+          <header class="task-header">
+            <h3 id="skills-title">Close-up skills</h3>
+            <p>Individual actions with a view of tool alignment, contact, and motion.</p>
+          </header>
+          <div id="skills-content"><p class="task-status">Skill videos pending.</p></div>
+        </section>
+
+        <section class="task-example" id="rollouts" aria-labelledby="rollout-title">
+          <header class="task-header">
+            <h3 id="rollout-title">Full task rollouts</h3>
+            <p>Observation and manipulation annotated on the same timeline.</p>
+          </header>
+          <div id="rollouts-content"><p class="task-status">Recorded rollouts pending.</p></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="evaluation-section" id="evaluation" aria-labelledby="evaluation-title">
       <div class="shell">
         <div class="section-heading" data-reveal>
-          <h2 id="rollout-title">Active <span class="keep-together">hand–eye</span> coordination</h2>
-          <p class="section-description">The focus is the timing of a chemistry step. A rollout lets viewers examine what the robot observes before, during, and after a tool action.</p>
+          <h2 id="evaluation-title">Evaluation</h2>
         </div>
-        <div id="rollouts-content">
-          <div class="coordination-guide">
-            <div class="guide-heading">
-              <h3>What to look for in a rollout</h3>
-              <p>Recorded rollouts pending.</p>
-            </div>
-            <ol class="phase-grid">
-              <li class="phase">
-                <h4>Before contact</h4>
-                <dl>
-                  <div><dt>Observation</dt><dd>What region does the robot look at?</dd></div>
-                  <div><dt>Manipulation</dt><dd>How does the tool approach?</dd></div>
-                </dl>
-              </li>
-              <li class="phase">
-                <h4>During the action</h4>
-                <dl>
-                  <div><dt>Observation</dt><dd>How does the view follow the interaction?</dd></div>
-                  <div><dt>Manipulation</dt><dd>What happens at the point of contact?</dd></div>
-                </dl>
-              </li>
-              <li class="phase">
-                <h4>After the action</h4>
-                <dl>
-                  <div><dt>Observation</dt><dd>What can the robot verify from the view?</dd></div>
-                  <div><dt>Manipulation</dt><dd>What movement follows?</dd></div>
-                </dl>
-              </li>
-            </ol>
-          </div>
+        <div class="evaluation-grid">
+          <section class="evaluation-part" id="protocol" aria-labelledby="protocol-title">
+            <h3 id="protocol-title">Protocol</h3>
+            <div id="protocol-content"><p class="task-status">Evaluation protocol pending.</p></div>
+          </section>
+          <section class="evaluation-part" id="results" aria-labelledby="results-title">
+            <h3 id="results-title">Results</h3>
+            <div id="results-content"><p class="task-status">Benchmark results pending.</p></div>
+          </section>
         </div>
       </div>
-    </section>
-
-    <section class="shell panel-section" id="results" hidden aria-labelledby="results-title">
-      <h2 id="results-title">Results</h2>
-      <div id="results-content"></div>
     </section>
 
     <section class="shell panel-section" id="citation" hidden aria-labelledby="citation-title">

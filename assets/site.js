@@ -79,9 +79,11 @@ function renderHero() {
 }
 
 function renderResearch(id, record) {
-  if (!record?.text && !record?.figure?.src) return;
+  const paragraphs = (record?.text || "").trim().split(/\n\s*\n/).filter(Boolean);
+  if (!paragraphs.length && !record?.figure?.src) return;
   const target = get(id + "-content");
-  for (const paragraph of (record.text || "").trim().split(/\n\s*\n/).filter(Boolean)) {
+  target.replaceChildren();
+  for (const paragraph of paragraphs) {
     target.append(element("p", "", paragraph));
   }
   if (record.figure?.src) {
@@ -95,7 +97,6 @@ function renderResearch(id, record) {
     if (caption) figure.append(element("figcaption", "", caption));
     target.append(figure);
   }
-  get(id).hidden = false;
 }
 
 function renderEntries(target, label, entries, renderEntry) {
@@ -166,7 +167,7 @@ function renderPair(target, comparison) {
     status.textContent = "";
   });
   tools.append(play, pause, status);
-  target.append(element("h3", "entry-title", comparison.title), grid, tools);
+  target.append(element("h4", "entry-title", comparison.title), grid, tools);
   if (comparison.caption) target.append(element("p", "media-note", comparison.caption));
 }
 
@@ -181,7 +182,7 @@ function renderSkills(entries) {
     const card = element("article", "media-card");
     const { wrapper, video } = media(skill, skill.title);
     const body = element("div", "skill-body");
-    body.append(element("h3", "", skill.title));
+    body.append(element("h4", "", skill.title));
     if (skill.caption) body.append(element("p", "", skill.caption));
     card.append(wrapper, body);
     grid.append(card);
@@ -278,15 +279,17 @@ function renderRollout(target, rollout) {
       updateChapter(video.currentTime);
     });
     updateChapter(0);
-    panel.append(element("h3", "", "Hand–eye timeline"), list);
+    panel.append(element("h4", "", "Hand–eye timeline"), list);
     grid.append(panel);
   }
-  target.append(element("h3", "entry-title", rollout.title), grid);
+  target.append(element("h4", "entry-title", rollout.title), grid);
   if (rollout.caption) target.append(element("p", "media-note", rollout.caption));
 }
 
 renderHero();
+get("abstract-summary").hidden = Boolean(project.overview?.text?.trim());
 renderResearch("research", project.overview);
+renderResearch("protocol", project.protocol);
 renderResearch("results", project.results);
 
 const pairs = project.comparisons.filter(({ fixed, active }) => fixed?.src && active?.src);
