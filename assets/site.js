@@ -1,5 +1,5 @@
 import { project } from "./content.js";
-import { drawViewpoint } from "./illustration.js";
+import { renderTaskCatalog } from "./tasks.js";
 
 const get = (id) => document.getElementById(id);
 
@@ -73,8 +73,6 @@ function renderHero() {
     get("hero-media").replaceChildren(media(hero, "ActiveLab overview video", "metadata").wrapper);
     get("hero-caption").textContent = hero.caption || "";
     get("hero-caption").hidden = !hero.caption;
-  } else {
-    drawViewpoint(get("viewpoint-illustration"));
   }
 }
 
@@ -287,6 +285,7 @@ function renderRollout(target, rollout) {
 }
 
 renderHero();
+renderTaskCatalog(get("catalog-content"));
 get("abstract-summary").hidden = Boolean(project.overview?.text?.trim());
 renderResearch("research", project.overview);
 renderResearch("protocol", project.protocol);

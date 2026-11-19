@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="ActiveLab studies active observation, fine manipulation, and active hand–eye coordination in robotic chemistry.">
+  <meta name="description" content="ActiveLab is a three-arm robotic chemistry benchmark with atomic skills, composed tasks, and four-view demonstrations.">
   <meta name="theme-color" content="#f9fbff">
   <link rel="canonical" href="https://yuzhaoshu.github.io/activelab/">
   <link rel="stylesheet" href="./assets/vendor/lenis.css">
@@ -18,9 +18,9 @@
     <nav class="shell nav" aria-label="Main navigation">
       <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>ActiveLab</a>
       <div class="nav-links">
-        <a href="#research">Abstract</a>
         <a href="#benchmark">Benchmark</a>
         <a href="#tasks">Tasks</a>
+        <a href="#dataset">Dataset</a>
         <a href="#evaluation">Evaluation</a>
       </div>
       <a class="repo-link" href="https://github.com/YuZhaoshu/activelab">Website source</a>
@@ -33,6 +33,7 @@
       <div class="masthead">
         <h1 id="hero-title">ActiveLab</h1>
         <p class="hero-subtitle">Benchmarking active perception and manipulation in robotic chemistry</p>
+        <p class="hero-description">A three-arm platform and a task suite spanning individual lab skills and multi-step workflows.</p>
         <div id="project-meta" hidden></div>
         <div id="project-links" class="project-links" role="group" aria-label="Research resources">
           <button type="button" class="resource" disabled>arXiv</button>
@@ -42,11 +43,11 @@
       </div>
       <figure class="hero-figure">
         <div class="hero-stage" id="hero-media">
-          <canvas id="viewpoint-illustration" aria-hidden="true"></canvas>
+          <img src="./assets/media/activelab-rig.jpg" alt="The ActiveLab rig with its elevated camera arm and two lower gripper arms on a shared stand" fetchpriority="high" width="1049" height="1400">
         </div>
         <figcaption id="hero-caption">
-          <span>Concept illustration</span>
-          <span class="view-legend">Camera field of view</span>
+          <span>ActiveLab physical platform</span>
+          <span>One camera arm · Two manipulation arms</span>
         </figcaption>
       </figure>
     </section>
@@ -54,7 +55,7 @@
     <section class="shell panel-section" id="research" aria-labelledby="research-title">
       <div class="paper-prose">
         <h2 id="research-title" data-reveal>Abstract</h2>
-        <p id="abstract-summary">Robotic chemistry combines changing viewpoints with precise tool interactions. ActiveLab studies active observation, fine manipulation, and active hand–eye coordination in this shared task setting.</p>
+        <p id="abstract-summary">ActiveLab studies active observation, fine manipulation, and active hand–eye coordination in a shared chemistry workspace. An independently movable camera arm observes the task while two gripper arms interact with labware. The task suite captures both individual interactions, such as inserting a glass rod into a test tube, and compositions, such as transferring liquid and returning the test tube to its rack.</p>
       </div>
       <div class="paper-prose" id="research-content"></div>
     </section>
@@ -84,7 +85,17 @@
         </div>
         <div class="shared-context">
           <h3>Shared task context</h3>
-          <p>At the point where a tool meets labware, observation concerns visibility of the contact point, manipulation concerns alignment and motion, and coordination concerns how the view changes around that interaction.</p>
+          <p>Consider an insertion task. The camera determines whether the opening is visible, the gripper aligns the tool with the opening, and the timing of view changes matters as the tool approaches and enters.</p>
+        </div>
+        <div class="platform">
+          <div>
+            <h3>Three arms at one workstation</h3>
+            <p>The upper arm carries the active camera. Two lower arms handle labware and tools, including handoffs between grippers.</p>
+          </div>
+          <dl class="platform-roles">
+            <div><dt>Camera arm</dt><dd>Moves the observation viewpoint independently of the grippers.</dd></div>
+            <div><dt>Manipulation arms</dt><dd>Handle tools and labware through retrieval, placement, and fine interactions.</dd></div>
+          </dl>
         </div>
       </div>
     </section>
@@ -93,6 +104,41 @@
       <div class="section-heading" data-reveal>
         <h2 id="tasks-title">Tasks and demonstrations</h2>
       </div>
+      <p class="gallery-label">Frames from recorded demonstrations · Active camera view</p>
+      <div class="sample-grid">
+        <figure class="sample-card">
+          <img src="./assets/media/beaker-handoff.jpg" alt="Two robotic grippers positioned around a glass beaker" width="640" height="480" loading="lazy">
+          <figcaption><strong>Pass a beaker between grippers</strong><span>Bimanual handoff</span></figcaption>
+        </figure>
+        <figure class="sample-card">
+          <img src="./assets/media/cylinder-pour.jpg" alt="An overhead view of a gripper and glassware during a liquid-transfer demonstration" width="640" height="480" loading="lazy">
+          <figcaption><strong>Pour from a graduated cylinder</strong><span>Liquid transfer</span></figcaption>
+        </figure>
+        <figure class="sample-card">
+          <img src="./assets/media/glass-rod-stir.jpg" alt="A glass rod is held next to a beaker containing liquid" width="640" height="480" loading="lazy">
+          <figcaption><strong>Stir a beaker with a glass rod</strong><span>Tool use</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="compositions">
+        <h3>From skills to composed tasks</h3>
+        <div class="composition-grid">
+          <article>
+            <h4>Transfer liquid and return the test tube</h4>
+            <ol><li>Retrieve the test tube</li><li>Pour into the beaker</li><li>Return the tube to the rack</li></ol>
+          </article>
+          <article>
+            <h4>Pour and stir with both arms</h4>
+            <ol><li>Pour from the cylinder</li><li>Put down the cylinder</li><li>Pick up the glass rod and stir</li></ol>
+          </article>
+        </div>
+      </div>
+
+      <details class="task-catalog">
+        <summary>Browse the 50 recorded tasks</summary>
+        <div id="catalog-content"></div>
+      </details>
+
       <div class="task-grid">
         <section class="task-example" id="perception" aria-labelledby="perception-title">
           <header class="task-header">
@@ -117,6 +163,34 @@
           </header>
           <div id="rollouts-content"><p class="task-status">Recorded rollouts pending.</p></div>
         </section>
+      </div>
+    </section>
+
+    <section class="dataset-section" id="dataset" aria-labelledby="dataset-title">
+      <div class="shell">
+        <div class="section-heading" data-reveal>
+          <h2 id="dataset-title">Demonstration dataset</h2>
+          <p class="section-description">The processed collection pairs language instructions with camera views, robot state, and action at 30 Hz.</p>
+        </div>
+        <dl class="dataset-stats">
+          <div><dt>Atomic tasks</dt><dd>40</dd></div>
+          <div><dt>Composed tasks</dt><dd>10</dd></div>
+          <div><dt>Demonstrations</dt><dd>5,000</dd></div>
+          <div><dt>Trajectory hours</dt><dd>23.84</dd></div>
+        </dl>
+        <p class="dataset-note">Processed snapshot from <time datetime="2026-11-17">17 November 2026</time>. Duration counts each trajectory once across the four RGB streams.</p>
+        <div class="capture-grid">
+          <div>
+            <h3>One episode, four perspectives</h3>
+            <p>Each episode records an active view, a third-person view, and both wrist views alongside joint and gripper state and commands.</p>
+          </div>
+          <ul class="view-list">
+            <li><strong>Active view</strong><span>Camera arm</span></li>
+            <li><strong>Third-person view</strong><span>Shared workspace</span></li>
+            <li><strong>Left wrist</strong><span>Local gripper view</span></li>
+            <li><strong>Right wrist</strong><span>Local gripper view</span></li>
+          </ul>
+        </div>
       </div>
     </section>
 

@@ -2,7 +2,7 @@
 
 ActiveLab 的静态学术项目主页，目标地址为 [yuzhaoshu.github.io/activelab/](https://yuzhaoshu.github.io/activelab/)。本仓库用于维护和发布项目网站。直接使用 HTML、CSS 和原生 JavaScript。网站界面使用英文。
 
-网站采用 benchmark 论文主页的阅读顺序，从标题和论文资源进入 Abstract、Benchmark、Tasks and demonstrations、Evaluation 和 BibTeX。主动观测、精细操作和主动手眼协同是同一化学任务的三个并列考察维度。任务区分别呈现视角对比、技能近景和完整实验，评估区用于发布正式协议与结果。
+网站采用 benchmark 论文主页的阅读顺序，从标题和论文资源进入 Abstract、Benchmark、Tasks and demonstrations、Dataset、Evaluation 和 BibTeX。主动观测、精细操作和主动手眼协同是同一化学任务的三个并列考察维度。任务区分别呈现视角对比、技能近景和完整实验，评估区用于发布正式协议与结果。
 
 ## 设计参考
 
@@ -14,9 +14,11 @@ ActiveLab 的静态学术项目主页，目标地址为 [yuzhaoshu.github.io/act
 | [ORGANA](https://ac-rad.github.io/organa/) | 给完整化学实验视频保留宽屏空间。ActiveLab 在视频旁增加可跳转的实验步骤。 |
 | [AtomicVLA](https://zhanglk9.github.io/atomicvla-web/) | 让技能、长程执行和条件对比各有独立入口，便于从动作看回完整任务。 |
 
-二级参考用于补充组织方式。ActiveScale 采用目录导航，ActiveVLA 以视频打开主题，EFM、SCALE 和 AVA-VLA 用实验条件或视图解释感知问题。Compose by Focus、RoboTwin 和 Chemistry Lab Automation 提供技能、任务与实验素材的组织参考。站点沿用学术页的短导航、宽幅媒体、紧凑图注和可选 BibTeX，首屏居中呈现标题、作者及论文资源，导航随阅读位置高亮。对比与 Rollout 在窄屏上改为单列。 [ActiveScale](https://active-scale.github.io/) · [ActiveVLA](https://zhenyangliu.github.io/ActiveVLA/) · [EFM](https://efmanipulation.github.io/) · [SCALE](https://dcahn12.github.io/projects/scale/) · [AVA-VLA](https://liauto-dsr.github.io/AVA-VLA-Page/) · [Compose by Focus](https://computationalrobotics.seas.harvard.edu/SkillComposition/) · [RoboTwin](https://robotwin-platform.github.io/) · [Chemistry Lab Automation](https://ac-rad.github.io/robot-chemist-tamp/) · [Academic Project Page Template](https://github.com/eliahuhorwitz/Academic-project-page-template)
+二级参考用于补充组织方式。ActiveScale 采用目录导航，ActiveVLA 以视频打开主题，EFM、SCALE 和 AVA-VLA 用实验条件或视图解释感知问题。Compose by Focus、RoboTwin 和 Chemistry Lab Automation 提供技能、任务与实验素材的组织参考。站点沿用学术页的短导航、宽幅媒体、紧凑图注和可选 BibTeX，首屏并排呈现标题、论文资源与实机照片。示范帧、任务目录和数据快照分别呈现。导航随阅读位置高亮。对比与 Rollout 在窄屏上改为单列。 [ActiveScale](https://active-scale.github.io/) · [ActiveVLA](https://zhenyangliu.github.io/ActiveVLA/) · [EFM](https://efmanipulation.github.io/) · [SCALE](https://dcahn12.github.io/projects/scale/) · [AVA-VLA](https://liauto-dsr.github.io/AVA-VLA-Page/) · [Compose by Focus](https://computationalrobotics.seas.harvard.edu/SkillComposition/) · [RoboTwin](https://robotwin-platform.github.io/) · [Chemistry Lab Automation](https://ac-rad.github.io/robot-chemist-tamp/) · [Academic Project Page Template](https://github.com/eliahuhorwitz/Academic-project-page-template)
 
 网站内置 Lenis 1.3.27 和 Geist 网页字体，许可证随文件保存。开启系统「减少动态效果」时，页面使用即时跳转并关闭入场动画。 [Lenis](https://github.com/darkroomengineering/lenis) · [Geist](https://github.com/vercel/geist-font)
+
+任务目录按已处理数据中的操作类型分组，组合任务由原始任务描述概括。数据规模采用 2026-11-17 的处理后快照，轨迹时长按 episode 计入一次。示范配图来自项目记录的主动相机帧。
 
 ## 本地预览
 
@@ -39,7 +41,7 @@ python3 -m http.server 8000 --bind 127.0.0.1
 | --- | --- |
 | `authors`、`affiliations` | 字符串数组，按正式顺序填写。 |
 | `links` | `{ label, purpose?, url }` 数组。arXiv 用于论文，GitHub 用于课题代码，Hugging Face 用于模型或数据。保留 `url: null` 显示禁用按钮，填入正式 URL 后即可打开。页面导航中的 Website source 指向网页仓库。 |
-| `hero` | `{ src, poster?, caption?, captions? }`。设置主视频后，播放器会替换首屏的视角示意图。 |
+| `hero` | `{ src, poster?, caption?, captions? }`。设置主视频后，播放器会替换首屏的三臂实机照片。 |
 | `overview`、`protocol`、`results` | `{ text, figure?: { src, alt, caption? } }`。分别填写正式摘要、评估协议与结果。正文以空行分段。 |
 | `comparisons` | `{ title, caption?, fixed, active }` 数组。两侧各为 `{ src, label?, poster?, captions? }`。用同一任务、同一时间起点的片段。访客可以从头同时播放两侧。 |
 | `skills` | `{ title, category?, src, poster?, caption?, captions? }` 数组。`category` 会自动生成过滤项。近景素材优先覆盖工具对齐、接触点及接触后的动作。 |
