@@ -213,11 +213,21 @@ function renderRollout(target, rollout) {
     .filter(({ time, label }) => Number.isFinite(time) && time >= 0 && label)
     .sort((a, b) => a.time - b.time);
   grid.classList.toggle("no-chapters", !steps.length);
-  grid.append(wrapper);
+  const player = element("div", "rollout-player");
+  player.append(wrapper);
+  grid.append(player);
 
   if (steps.length) {
     const panel = element("div", "chapter-panel");
     const list = element("ol", "chapter-list");
+    const notes = element("dl", "step-notes");
+    notes.setAttribute("aria-label", "Current step annotations");
+    notes.hidden = true;
+    if (steps.some(({ observation, manipulation }) => observation || manipulation)) {
+      player.append(notes);
+    }
+
+    let activeStep = -1;
     const chapters = steps.map(({ time, label }) => {
       const minute = Math.floor(time / 60);
       const second = String(Math.floor(time % 60)).padStart(2, "0");
@@ -238,10 +248,23 @@ function renderRollout(target, rollout) {
       steps.forEach(({ time }, index) => {
         if (time <= currentTime && !chapters[index].disabled) active = index;
       });
-      chapters.forEach((control, index) => {
-        if (active === index) control.setAttribute("aria-current", "step");
-        else control.removeAttribute("aria-current");
-      });
+      if (active === activeStep) return;
+      chapters[activeStep]?.removeAttribute("aria-current");
+      chapters[active]?.setAttribute("aria-current", "step");
+      activeStep = active;
+
+      const step = steps[active];
+      notes.replaceChildren();
+      for (const [label, description] of [
+        ["Observation", step?.observation],
+        ["Manipulation", step?.manipulation],
+      ]) {
+        if (!description) continue;
+        const row = element("div");
+        row.append(element("dt", "", label), element("dd", "", description));
+        notes.append(row);
+      }
+      notes.hidden = !notes.childElementCount;
     }
     video.addEventListener("timeupdate", () => updateChapter(video.currentTime));
     video.addEventListener("durationchange", () => {
@@ -255,7 +278,7 @@ function renderRollout(target, rollout) {
       updateChapter(video.currentTime);
     });
     updateChapter(0);
-    panel.append(element("h3", "", "Experiment steps"), list);
+    panel.append(element("h3", "", "Hand–eye timeline"), list);
     grid.append(panel);
   }
   target.append(element("h3", "entry-title", rollout.title), grid);

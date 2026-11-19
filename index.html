@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="ActiveLab studies active perception and atomic skill composition for multi-step robotic chemistry experiments.">
+  <meta name="description" content="ActiveLab studies active observation, fine manipulation, and active hand–eye coordination in robotic chemistry.">
   <meta name="theme-color" content="#f9fbff">
   <link rel="canonical" href="https://yuzhaoshu.github.io/activelab/">
   <link rel="stylesheet" href="./assets/vendor/lenis.css">
   <link rel="stylesheet" href="./assets/site.css">
   <script type="module" src="./assets/site.js"></script>
   <script type="module" src="./assets/reading.js"></script>
-  <title>ActiveLab | Active Perception for Robotic Chemistry</title>
+  <title>ActiveLab | Active Hand–Eye Coordination for Robotic Chemistry</title>
 </head>
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -18,9 +18,9 @@
     <nav class="shell nav" aria-label="Main navigation">
       <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>ActiveLab</a>
       <div class="nav-links">
-        <a href="#perception">Perception</a>
-        <a href="#skills">Skills</a>
-        <a href="#rollouts">Rollouts</a>
+        <a href="#perception">Observation</a>
+        <a href="#skills">Manipulation</a>
+        <a href="#rollouts">Coordination</a>
       </div>
       <a class="repo-link" href="https://github.com/YuZhaoshu/activelab">Website source</a>
     </nav>
@@ -30,10 +30,11 @@
   <main id="main" tabindex="-1">
     <section class="shell hero" aria-labelledby="hero-title">
       <div class="masthead">
-        <h1 id="hero-title">Active perception <span>for robotic chemistry</span></h1>
-        <p class="hero-description">Studying how robots choose where to look and combine atomic skills in multi-step chemical experiments.</p>
+        <p class="hero-field">Robotic chemistry</p>
+        <h1 id="hero-title">Active hand–eye <span>coordination</span></h1>
+        <p class="hero-description">How can a robot choose what to observe, manipulate lab tools precisely, and adjust its view as the action unfolds?</p>
         <div id="project-meta" hidden></div>
-        <a class="primary-action" href="#perception">Explore the experiments</a>
+        <a class="primary-action" href="#rollouts">Explore the hand–eye loop</a>
         <div id="project-links" class="project-links" role="group" aria-label="Research resources">
           <button type="button" class="resource" disabled>arXiv</button>
           <button type="button" class="resource" disabled>GitHub</button>
@@ -49,6 +50,20 @@
           <span class="view-legend">Camera field of view</span>
         </figcaption>
       </figure>
+      <nav class="research-path" aria-label="Research focus">
+        <a class="focus-card" href="#perception">
+          <span class="lens-symbol lens-observe" aria-hidden="true"></span>
+          <span><strong>Active observation</strong><span>Choose a view of the task-relevant region.</span></span>
+        </a>
+        <a class="focus-card" href="#skills">
+          <span class="lens-symbol lens-manipulate" aria-hidden="true"></span>
+          <span><strong>Fine manipulation</strong><span>Inspect alignment, contact, and tool motion.</span></span>
+        </a>
+        <a class="focus-card focus-card-feature" href="#rollouts">
+          <span class="lens-symbol lens-coordinate" aria-hidden="true"></span>
+          <span><strong>Active hand–eye coordination</strong><span>Follow the view and action on one timeline.</span></span>
+        </a>
+      </nav>
     </section>
 
     <section class="shell panel-section" id="research" hidden aria-labelledby="research-title">
@@ -58,8 +73,8 @@
 
     <section class="shell panel-section" id="perception" aria-labelledby="perception-title">
       <div class="section-heading" data-reveal>
-        <h2 id="perception-title">Fixed vs. active views</h2>
-        <p class="section-description">How does a change in camera viewpoint affect what the robot can see during the same task?</p>
+        <h2 id="perception-title">Active observation</h2>
+        <p class="section-description">Compare fixed and active views of the same task. Look at what changes around the object or working region as the camera moves.</p>
       </div>
       <div id="comparisons">
         <div class="comparison-grid">
@@ -79,30 +94,54 @@
     <section class="skills-section" id="skills" aria-labelledby="skills-title">
       <div class="shell">
         <div class="section-heading" data-reveal>
-          <h2 id="skills-title">Atomic skills</h2>
-          <p class="section-description">Browse individual robot actions that can be combined into longer experiments.</p>
+          <h2 id="skills-title">Fine manipulation</h2>
+          <p class="section-description">Use close-ups of individual skills to inspect tool alignment, contact with labware, and the motion that follows.</p>
         </div>
         <div id="skills-content">
           <div class="placeholder gallery-placeholder">
-            <span class="reel-mark" aria-hidden="true"></span>
-            <p>Skill videos pending.</p>
+            <span class="lens-symbol lens-manipulate" aria-hidden="true"></span>
+            <p>Close-up skill videos pending.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="shell panel-section rollout-section" id="rollouts" aria-labelledby="rollout-title">
-      <div class="section-heading" data-reveal>
-        <h2 id="rollout-title">Lab rollouts</h2>
-        <p class="section-description">Watch full experimental runs and jump to individual steps.</p>
-      </div>
-      <div id="rollouts-content">
-        <div class="rollout-grid">
-          <div class="placeholder rollout-placeholder">
-            <span class="reel-mark" aria-hidden="true"></span>
-            <p>Rollout videos pending.</p>
+    <section class="rollout-section" id="rollouts" aria-labelledby="rollout-title">
+      <div class="shell">
+        <div class="section-heading" data-reveal>
+          <h2 id="rollout-title">Active <span class="keep-together">hand–eye</span> coordination</h2>
+          <p class="section-description">The focus is the timing of a chemistry step. A rollout lets viewers examine what the robot observes before, during, and after a tool action.</p>
+        </div>
+        <div id="rollouts-content">
+          <div class="coordination-guide">
+            <div class="guide-heading">
+              <h3>What to look for in a rollout</h3>
+              <p>Recorded rollouts pending.</p>
+            </div>
+            <ol class="phase-grid">
+              <li class="phase">
+                <h4>Before contact</h4>
+                <dl>
+                  <div><dt>Observation</dt><dd>What region does the robot look at?</dd></div>
+                  <div><dt>Manipulation</dt><dd>How does the tool approach?</dd></div>
+                </dl>
+              </li>
+              <li class="phase">
+                <h4>During the action</h4>
+                <dl>
+                  <div><dt>Observation</dt><dd>How does the view follow the interaction?</dd></div>
+                  <div><dt>Manipulation</dt><dd>What happens at the point of contact?</dd></div>
+                </dl>
+              </li>
+              <li class="phase">
+                <h4>After the action</h4>
+                <dl>
+                  <div><dt>Observation</dt><dd>What can the robot verify from the view?</dd></div>
+                  <div><dt>Manipulation</dt><dd>What movement follows?</dd></div>
+                </dl>
+              </li>
+            </ol>
           </div>
-          <aside class="chapter-panel"><h3>Experiment steps</h3><p>Step navigation appears with each rollout.</p></aside>
         </div>
       </div>
     </section>

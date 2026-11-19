@@ -2,6 +2,8 @@
 
 ActiveLab 的静态学术项目主页，目标地址为 [yuzhaoshu.github.io/activelab/](https://yuzhaoshu.github.io/activelab/)。本仓库用于维护和发布项目网站。直接使用 HTML、CSS 和原生 JavaScript。网站界面使用英文。
 
+首页围绕化学实验中的三个研究问题组织。主动观测用同一任务的固定和主动视角呈现，精细操作用单项技能近景呈现，主动手眼协同用完整实验的章节时间线呈现。章节可在同一时刻标注观测与操作。
+
 ## 设计参考
 
 | 参考 | 借鉴到 ActiveLab 的设计 |
@@ -40,8 +42,8 @@ python3 -m http.server 8000 --bind 127.0.0.1
 | `hero` | `{ src, poster?, caption?, captions? }`。设置主视频后，播放器会替换首屏的视角示意图。 |
 | `overview`、`results` | `{ text, figure?: { src, alt, caption? } }`。正文以空行分段。 |
 | `comparisons` | `{ title, caption?, fixed, active }` 数组。两侧各为 `{ src, label?, poster?, captions? }`。用同一任务、同一时间起点的片段。访客可以从头同时播放两侧。 |
-| `skills` | `{ title, category?, src, poster?, caption?, captions? }` 数组。`category` 会自动生成过滤项。 |
-| `rollouts` | `{ title, src, poster?, caption?, captions?, steps? }` 数组。`steps` 由 `{ time, label }` 组成，`time` 为视频起点后的秒数，可用小数。 |
+| `skills` | `{ title, category?, src, poster?, caption?, captions? }` 数组。`category` 会自动生成过滤项。近景素材优先覆盖工具对齐、接触点及接触后的动作。 |
+| `rollouts` | `{ title, src, poster?, caption?, captions?, steps? }` 数组。`steps` 由 `{ time, label, observation?, manipulation? }` 组成，`time` 为视频起点后的秒数，可用小数。两个可选文本跟随当前章节显示，分别说明此时的观测与操作。可用已对齐的分屏视频同时展示机载画面和工作区。 |
 | `bibtex` | 正式 BibTeX 文本，可用 JS 模板字符串保留换行。 |
 
 表中的 `?` 表示字段可省略，无需写入配置。视频的 `captions` 是 `{ src, label, lang }` 数组，其中 `lang` 使用 `en` 或 `zh` 等语言代码。视频集为空时，页面显示待补状态。概述、结果和 BibTeX 在填入内容后显示。
