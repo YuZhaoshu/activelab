@@ -14,11 +14,11 @@ ActiveLab 的静态学术项目主页，目标地址为 [yuzhaoshu.github.io/act
 | [ORGANA](https://ac-rad.github.io/organa/) | 给完整化学实验视频保留宽屏空间。ActiveLab 在视频旁增加可跳转的实验步骤。 |
 | [AtomicVLA](https://zhanglk9.github.io/atomicvla-web/) | 让技能、长程执行和条件对比各有独立入口，便于从动作看回完整任务。 |
 
-二级参考用于补充组织方式。ActiveScale 采用目录导航，ActiveVLA 以视频打开主题，EFM、SCALE 和 AVA-VLA 用实验条件或视图解释感知问题。Compose by Focus、RoboTwin 和 Chemistry Lab Automation 提供技能、任务与实验素材的组织参考。站点沿用学术页的短导航、宽幅媒体、紧凑图注和可选 BibTeX，首屏并排呈现标题、论文资源与实机照片。示范帧、任务目录和数据快照分别呈现。导航随阅读位置高亮。对比与 Rollout 在窄屏上改为单列。 [ActiveScale](https://active-scale.github.io/) · [ActiveVLA](https://zhenyangliu.github.io/ActiveVLA/) · [EFM](https://efmanipulation.github.io/) · [SCALE](https://dcahn12.github.io/projects/scale/) · [AVA-VLA](https://liauto-dsr.github.io/AVA-VLA-Page/) · [Compose by Focus](https://computationalrobotics.seas.harvard.edu/SkillComposition/) · [RoboTwin](https://robotwin-platform.github.io/) · [Chemistry Lab Automation](https://ac-rad.github.io/robot-chemist-tamp/) · [Academic Project Page Template](https://github.com/eliahuhorwitz/Academic-project-page-template)
+二级参考用于补充组织方式。ActiveScale 采用目录导航，ActiveVLA 以视频打开主题，EFM、SCALE 和 AVA-VLA 用实验条件或视图解释感知问题。Compose by Focus、RoboTwin 和 Chemistry Lab Automation 提供技能、任务与实验素材的组织参考。站点沿用学术页的短导航、宽幅媒体、紧凑图注和可选 BibTeX，首屏并排呈现标题、论文资源与实机照片。任务区默认显示一个主预览和精选任务，访客可按需展开完整目录。导航随阅读位置高亮。对比与 Rollout 在窄屏上改为单列。 [ActiveScale](https://active-scale.github.io/) · [ActiveVLA](https://zhenyangliu.github.io/ActiveVLA/) · [EFM](https://efmanipulation.github.io/) · [SCALE](https://dcahn12.github.io/projects/scale/) · [AVA-VLA](https://liauto-dsr.github.io/AVA-VLA-Page/) · [Compose by Focus](https://computationalrobotics.seas.harvard.edu/SkillComposition/) · [RoboTwin](https://robotwin-platform.github.io/) · [Chemistry Lab Automation](https://ac-rad.github.io/robot-chemist-tamp/) · [Academic Project Page Template](https://github.com/eliahuhorwitz/Academic-project-page-template)
 
 网站内置 Lenis 1.3.27 和 Geist 网页字体，许可证随文件保存。开启系统「减少动态效果」时，页面使用即时跳转并关闭入场动画。 [Lenis](https://github.com/darkroomengineering/lenis) · [Geist](https://github.com/vercel/geist-font)
 
-任务目录按已处理数据中的操作类型分组，组合任务由原始任务描述概括。数据规模采用 2026-11-17 的处理后快照，轨迹时长按 episode 计入一次。示范配图来自项目记录的主动相机帧。
+任务目录按已处理数据中的操作类型分组，支持搜索和按素材筛选。支持悬停预览图片或视频封面，点击后固定任务。组合任务由原始任务描述概括。数据规模采用 2026-11-17 的处理后快照，轨迹时长按 episode 计入一次。示范配图来自项目记录的主动相机帧。
 
 ## 本地预览
 
@@ -43,12 +43,21 @@ python3 -m http.server 8000 --bind 127.0.0.1
 | `links` | `{ label, purpose?, url }` 数组。arXiv 用于论文，GitHub 用于课题代码，Hugging Face 用于模型或数据。保留 `url: null` 显示禁用按钮，填入正式 URL 后即可打开。页面导航中的 Website source 指向网页仓库。 |
 | `hero` | `{ src, poster?, caption?, captions? }`。设置主视频后，播放器会替换首屏的三臂实机照片。 |
 | `overview`、`protocol`、`results` | `{ text, figure?: { src, alt, caption? } }`。分别填写正式摘要、评估协议与结果。正文以空行分段。 |
+| `taskDemos` | 按任务 ID 填写，可为每个任务配置多个相机视角。详见下方。 |
 | `comparisons` | `{ title, caption?, fixed, active }` 数组。两侧各为 `{ src, label?, poster?, captions? }`。用同一任务、同一时间起点的片段。访客可以从头同时播放两侧。 |
 | `skills` | `{ title, category?, src, poster?, caption?, captions? }` 数组。`category` 会自动生成过滤项。近景素材优先覆盖工具对齐、接触点及接触后的动作。 |
 | `rollouts` | `{ title, src, poster?, caption?, captions?, steps? }` 数组。`steps` 由 `{ time, label, observation?, manipulation? }` 组成，`time` 为视频起点后的秒数，可用小数。两个可选文本跟随当前章节显示，分别说明此时的观测与操作。可用已对齐的分屏视频同时展示机载画面和工作区。 |
 | `bibtex` | 正式 BibTeX 文本，可用 JS 模板字符串保留换行。 |
 
 表中的 `?` 表示字段可省略，无需写入配置。视频的 `captions` 是 `{ src, label, lang }` 数组，其中 `lang` 使用 `en` 或 `zh` 等语言代码。视频、评估协议和结果采用待补提示。正式摘要填入后替换默认项目简介，BibTeX 在填入引用后显示。
+
+### 为任务添加演示
+
+在网页中点选任务后，地址栏的 `task=` 参数即为任务 ID。在 `assets/content.js` 的 `taskDemos` 中使用该 ID。现有标题保存在 `assets/tasks.js`，更改标题会改变从标题生成的 ID。
+
+- `views` 支持多条 `{ label, src?, image?, poster?, alt?, caption?, captions? }`。视频用 `src`，静帧用 `image`，视频悬停预览用 `poster`。每条视角使用明确标签，如 Active camera、Third-person view、Left wrist 或 Right wrist。
+- `steps` 是可选的步骤文本数组，适合展示组合任务的指令顺序。带时间戳的章节仍可在 `rollouts` 中配置。
+- 网页只为当前选中的视角创建播放器。缩略图可延迟加载，悬停显示静帧或封面。
 
 ## 发布到 GitHub Pages
 

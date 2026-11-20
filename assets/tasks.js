@@ -1,4 +1,4 @@
-const catalog = [
+export const catalog = [
   {
     "label": "Retrieval",
     "tasks": [
@@ -95,61 +95,3 @@ const catalog = [
     ]
   }
 ];
-
-export function renderTaskCatalog(container) {
-  const controls = document.createElement("div");
-  controls.className = "catalog-controls";
-
-  const search = document.createElement("input");
-  search.type = "search";
-  search.id = "task-search";
-  search.placeholder = "Search tasks";
-  search.setAttribute("aria-label", "Search recorded tasks");
-
-  const category = document.createElement("select");
-  category.setAttribute("aria-label", "Task category");
-  category.add(new Option("All categories", ""));
-  for (const group of catalog) {
-    category.add(new Option(group.label));
-  }
-
-  const status = document.createElement("p");
-  status.className = "catalog-status";
-  status.setAttribute("role", "status");
-
-  const results = document.createElement("div");
-  results.className = "catalog-results";
-  controls.append(search, category);
-  container.append(controls, status, results);
-
-  function update() {
-    const query = search.value.trim().toLowerCase();
-    results.replaceChildren();
-    let count = 0;
-
-    for (const group of catalog) {
-      if (category.value && group.label !== category.value) continue;
-      const tasks = group.tasks.filter((task) => task.toLowerCase().includes(query));
-      if (!tasks.length) continue;
-
-      const section = document.createElement("section");
-      const title = document.createElement("h4");
-      title.textContent = group.label;
-      const list = document.createElement("ul");
-      for (const task of tasks) {
-        const item = document.createElement("li");
-        item.textContent = task.charAt(0).toUpperCase() + task.slice(1);
-        list.append(item);
-      }
-      section.append(title, list);
-      results.append(section);
-      count += tasks.length;
-    }
-
-    status.textContent = count === 0 ? "No matching tasks." : count + (count === 1 ? " task" : " tasks");
-  }
-
-  search.addEventListener("input", update);
-  category.addEventListener("change", update);
-  update();
-}

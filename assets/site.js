@@ -1,47 +1,8 @@
 import { project } from "./content.js";
-import { renderTaskCatalog } from "./tasks.js";
+import { renderTaskGallery } from "./task-gallery.js";
+import { button, element, media } from "./ui.js";
 
 const get = (id) => document.getElementById(id);
-
-function element(tag, className, text) {
-  const node = document.createElement(tag);
-  if (className) node.className = className;
-  if (text) node.textContent = text;
-  return node;
-}
-
-function button(label, className = "control") {
-  const node = element("button", className, label);
-  node.type = "button";
-  return node;
-}
-
-function media(record, title, preload = "none") {
-  const wrapper = element("div", "video-wrap");
-  const video = element("video");
-  video.controls = true;
-  video.playsInline = true;
-  video.preload = preload;
-  video.setAttribute("aria-label", title);
-  if (record.poster) video.poster = record.poster;
-  video.src = record.src;
-
-  for (const { src, label, lang } of record.captions || []) {
-    const track = element("track");
-    track.kind = "captions";
-    track.label = label;
-    track.srclang = lang;
-    track.src = src;
-    video.append(track);
-  }
-
-  const error = element("p", "media-error", "This video could not be loaded.");
-  error.hidden = true;
-  error.setAttribute("role", "status");
-  video.addEventListener("error", () => { error.hidden = false; });
-  wrapper.append(video, error);
-  return { wrapper, video };
-}
 
 function renderHero() {
   const { hero, authors, affiliations, links } = project;
@@ -285,7 +246,7 @@ function renderRollout(target, rollout) {
 }
 
 renderHero();
-renderTaskCatalog(get("catalog-content"));
+
 get("abstract-summary").hidden = Boolean(project.overview?.text?.trim());
 renderResearch("research", project.overview);
 renderResearch("protocol", project.protocol);
@@ -293,9 +254,20 @@ renderResearch("results", project.results);
 
 const pairs = project.comparisons.filter(({ fixed, active }) => fixed?.src && active?.src);
 if (pairs.length) renderEntries(get("comparisons"), "Comparison", pairs, renderPair);
-renderSkills(project.skills.filter(({ src }) => src));
+const skills = project.skills.filter(({ src }) => src);
+renderSkills(skills);
 const rollouts = project.rollouts.filter(({ src }) => src);
 if (rollouts.length) renderEntries(get("rollouts-content"), "Experiment", rollouts, renderRollout);
+const extraExamples = { perception: pairs.length, skills: skills.length, rollouts: rollouts.length };
+for (const [section, count] of Object.entries(extraExamples)) {
+  get(section).hidden = !count;
+  if (count) get("task-examples").hidden = false;
+}
+for (const link of document.querySelectorAll("[data-example]")) {
+  if (extraExamples[link.dataset.example]) link.href = "#" + link.dataset.example;
+}
+renderTaskGallery(get("task-gallery"), project.taskDemos || {});
+
 if (project.bibtex.trim()) {
   get("bibtex").textContent = project.bibtex;
   get("citation").hidden = false;

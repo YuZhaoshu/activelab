@@ -67,17 +67,17 @@
           <p class="section-description">Three related dimensions for examining the same chemistry task.</p>
         </div>
         <div class="research-path">
-          <a class="dimension" href="#perception">
+          <a class="dimension" href="#tasks" data-example="perception" data-task-kind="all">
             <span class="lens-symbol lens-observe" aria-hidden="true"></span>
             <h3>Active observation</h3>
             <p>Which parts of the workspace does the robot choose to observe?</p>
           </a>
-          <a class="dimension" href="#skills">
+          <a class="dimension" href="#tasks" data-example="skills" data-task-kind="atomic">
             <span class="lens-symbol lens-manipulate" aria-hidden="true"></span>
             <h3>Fine manipulation</h3>
             <p>How precisely does the robot align and move a tool?</p>
           </a>
-          <a class="dimension" href="#rollouts">
+          <a class="dimension" href="#tasks" data-example="rollouts" data-task-kind="composed">
             <span class="lens-symbol lens-coordinate" aria-hidden="true"></span>
             <h3>Active hand–eye coordination</h3>
             <p>How does the timing of view changes relate to tool actions?</p>
@@ -102,45 +102,60 @@
 
     <section class="shell panel-section" id="tasks" aria-labelledby="tasks-title">
       <div class="section-heading" data-reveal>
-        <h2 id="tasks-title">Tasks and demonstrations</h2>
+        <h2 id="tasks-title">Task demonstrations</h2>
+        <p class="section-description">Browse atomic skills and composed tasks. Select a task to inspect its recording, camera views, or task steps.</p>
       </div>
-      <p class="gallery-label">Frames from recorded demonstrations · Active camera view</p>
-      <div class="sample-grid">
-        <figure class="sample-card">
-          <img src="./assets/media/beaker-handoff.jpg" alt="Two robotic grippers positioned around a glass beaker" width="640" height="480" loading="lazy">
-          <figcaption><strong>Pass a beaker between grippers</strong><span>Bimanual handoff</span></figcaption>
-        </figure>
-        <figure class="sample-card">
-          <img src="./assets/media/cylinder-pour.jpg" alt="An overhead view of a gripper and glassware during a liquid-transfer demonstration" width="640" height="480" loading="lazy">
-          <figcaption><strong>Pour from a graduated cylinder</strong><span>Liquid transfer</span></figcaption>
-        </figure>
-        <figure class="sample-card">
-          <img src="./assets/media/glass-rod-stir.jpg" alt="A glass rod is held next to a beaker containing liquid" width="640" height="480" loading="lazy">
-          <figcaption><strong>Stir a beaker with a glass rod</strong><span>Tool use</span></figcaption>
-        </figure>
-      </div>
-
-      <div class="compositions">
-        <h3>From skills to composed tasks</h3>
-        <div class="composition-grid">
-          <article>
-            <h4>Transfer liquid and return the test tube</h4>
-            <ol><li>Retrieve the test tube</li><li>Pour into the beaker</li><li>Return the tube to the rack</li></ol>
-          </article>
-          <article>
-            <h4>Pour and stir with both arms</h4>
-            <ol><li>Pour from the cylinder</li><li>Put down the cylinder</li><li>Pick up the glass rod and stir</li></ol>
-          </article>
+      <div id="task-gallery" class="task-gallery">
+        <div class="gallery-layout">
+          <div class="gallery-viewer">
+            <div class="gallery-preview-header">
+              <p id="gallery-category" class="gallery-category"></p>
+              <h3 id="gallery-task-title" tabindex="-1">Task preview</h3>
+            </div>
+            <div class="gallery-media">
+              <div id="gallery-stage" class="gallery-stage"></div>
+              <div id="gallery-hover-preview" class="gallery-hover-preview" aria-hidden="true" hidden></div>
+            </div>
+            <div id="gallery-view-options" class="gallery-view-options" role="group" aria-label="Camera views" hidden></div>
+            <p id="gallery-media-note" class="gallery-media-note" hidden></p>
+            <div id="gallery-steps" class="gallery-steps" hidden>
+              <h4>Task sequence</h4>
+              <ol></ol>
+            </div>
+            <div class="gallery-pagination">
+              <button class="control" type="button" id="gallery-previous">Previous</button>
+              <p id="gallery-position" aria-live="polite"></p>
+              <button class="control" type="button" id="gallery-next">Next</button>
+            </div>
+          </div>
+          <section class="gallery-browser" aria-labelledby="gallery-list-title">
+            <div class="gallery-browser-header">
+              <div>
+                <h3 id="gallery-list-title">Featured tasks</h3>
+                <p id="gallery-status" role="status"></p>
+              </div>
+              <button class="control gallery-toggle" type="button" id="gallery-toggle" aria-expanded="false" aria-controls="gallery-toolbar gallery-results">Browse all tasks</button>
+            </div>
+            <div class="gallery-toolbar" id="gallery-toolbar" hidden>
+              <div class="gallery-kinds" role="group" aria-label="Task type">
+                <button class="control" type="button" data-kind="all" aria-pressed="true">All tasks</button>
+                <button class="control" type="button" data-kind="atomic" aria-pressed="false">Atomic skills</button>
+                <button class="control" type="button" data-kind="composed" aria-pressed="false">Composed tasks</button>
+              </div>
+              <div class="gallery-filters">
+                <input type="search" id="task-search" placeholder="Search tasks" aria-label="Search tasks">
+                <select id="task-category" aria-label="Task category"></select>
+                <label class="gallery-availability"><input type="checkbox" id="task-media-filter"> With media</label>
+              </div>
+            </div>
+            <ul id="gallery-results" class="gallery-results"></ul>
+            <p class="gallery-pointer-hint">Hover over a thumbnail to preview. Click a task to select it.</p>
+          </section>
         </div>
       </div>
 
-      <details class="task-catalog">
-        <summary>Browse the 50 recorded tasks</summary>
-        <div id="catalog-content"></div>
-      </details>
-
-      <div class="task-grid">
-        <section class="task-example" id="perception" aria-labelledby="perception-title">
+      <div class="task-grid" id="task-examples" hidden>
+        <section class="task-example" id="perception" hidden aria-labelledby="perception-title">
           <header class="task-header">
             <h3 id="perception-title">Viewpoint comparisons</h3>
             <p>Fixed and active views of the same task step.</p>
@@ -148,7 +163,7 @@
           <div id="comparisons"><p class="task-status">Comparison videos pending.</p></div>
         </section>
 
-        <section class="task-example" id="skills" aria-labelledby="skills-title">
+        <section class="task-example" id="skills" hidden aria-labelledby="skills-title">
           <header class="task-header">
             <h3 id="skills-title">Close-up skills</h3>
             <p>Individual actions with a view of tool alignment, contact, and motion.</p>
@@ -156,7 +171,7 @@
           <div id="skills-content"><p class="task-status">Skill videos pending.</p></div>
         </section>
 
-        <section class="task-example" id="rollouts" aria-labelledby="rollout-title">
+        <section class="task-example" id="rollouts" hidden aria-labelledby="rollout-title">
           <header class="task-header">
             <h3 id="rollout-title">Full task rollouts</h3>
             <p>Observation and manipulation annotated on the same timeline.</p>
