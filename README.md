@@ -35,7 +35,7 @@ python3 -m http.server 8000 --bind 127.0.0.1
 
 素材准备好后，在仓库下创建 `assets/media/`，放入已获发布许可的 MP4、封面或 SVG/PNG 方法图。视频通常使用 H.264 MP4，字幕使用 WebVTT。素材路径写成相对于项目页的路径，例如 `./assets/media/<文件名>`。外部素材可使用完整 HTTPS URL，视频 URL 应直接指向可播放文件。
 
-编辑 `assets/content.js` 填写以下字段。项目名称与首页标题在 `index.html`，样式在 `assets/site.css`。
+编辑 `assets/content.js` 填写以下字段。项目名称与首页标题在 `index.html`，样式在 `assets/site.css`。 修改样式后同步更新 `index.html` 中 `site.css?v=` 后的前 12 位 SHA-256，浏览器即可请求新版本。
 
 | 字段 | 填写方式 |
 | --- | --- |
