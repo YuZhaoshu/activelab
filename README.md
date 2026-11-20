@@ -16,7 +16,7 @@ ActiveLab 的静态学术项目主页，目标地址为 [yuzhaoshu.github.io/act
 
 二级参考用于补充组织方式。ActiveScale 采用目录导航，ActiveVLA 以视频打开主题，EFM、SCALE 和 AVA-VLA 用实验条件或视图解释感知问题。Compose by Focus、RoboTwin 和 Chemistry Lab Automation 提供技能、任务与实验素材的组织参考。站点沿用学术页的短导航、宽幅媒体、紧凑图注和可选 BibTeX，首屏并排呈现标题、论文资源与实机照片。任务区默认显示一个主预览和精选任务，访客可按需展开完整目录。导航随阅读位置高亮。对比与 Rollout 在窄屏上改为单列。 [ActiveScale](https://active-scale.github.io/) · [ActiveVLA](https://zhenyangliu.github.io/ActiveVLA/) · [EFM](https://efmanipulation.github.io/) · [SCALE](https://dcahn12.github.io/projects/scale/) · [AVA-VLA](https://liauto-dsr.github.io/AVA-VLA-Page/) · [Compose by Focus](https://computationalrobotics.seas.harvard.edu/SkillComposition/) · [RoboTwin](https://robotwin-platform.github.io/) · [Chemistry Lab Automation](https://ac-rad.github.io/robot-chemist-tamp/) · [Academic Project Page Template](https://github.com/eliahuhorwitz/Academic-project-page-template)
 
-网站内置 Lenis 1.3.27 和 Geist 网页字体，许可证随文件保存。开启系统「减少动态效果」时，页面使用即时跳转并关闭入场动画。 [Lenis](https://github.com/darkroomengineering/lenis) · [Geist](https://github.com/vercel/geist-font)
+首页与章节标题及任务主预览标题使用 Space Grotesk，正文、导航和任务列表使用 Geist。两款字体均从站点本地加载，许可证随文件保存。网站内置 Lenis 1.3.27。开启系统「减少动态效果」时，页面使用即时跳转并关闭入场动画。 [Lenis](https://github.com/darkroomengineering/lenis) · [Geist](https://github.com/vercel/geist-font) · [Space Grotesk](https://github.com/floriankarsten/space-grotesk)
 
 任务目录按已处理数据中的操作类型分组，支持搜索和按素材筛选。支持悬停预览图片或视频封面，点击后固定任务。组合任务由原始任务描述概括。数据规模采用 2026-11-17 的处理后快照，轨迹时长按 episode 计入一次。示范配图来自项目记录的主动相机帧。
 
